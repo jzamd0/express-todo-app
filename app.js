@@ -5,6 +5,15 @@ dotenv.config()
 
 const app = express()
 
+const db = require('./models/index')
+db.sequelize.sync({ alter: process.env.DB_SYNC })
+    .then(() => {
+        console.log('Database synced')
+    })
+    .catch((err) => {
+        console.log('Failed to sync database: ' + err.message)
+    })
+    
 app.use(express.urlencoded({ extended: true }))
 
 app.set('view engine', 'pug')
