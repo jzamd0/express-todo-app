@@ -1,4 +1,29 @@
 extends base.pug
 
 block content
-  h1 Home
+    .col-md
+      // TEMP: Include alert
+    .col-md.card.card-body
+      .d-flex.mb-4
+        h3.me-auto
+          | Notes
+        .justify-content-end
+          a.btn.btn-success(href='/notes/new') Add note
+      if notes
+        table.table.table-striped.border.bg-white.table-sm.align-middle
+          thead
+            tr
+              th(scope='col') Note
+              th(scope='col') Updated
+              th(scope='col')
+          tbody
+          each n in notes
+            tr
+              th.w-50(scope='row') #{n.title}
+              td.w-25 #{n.updated_at}
+              td.text-end.ms-auto
+                a.btn.btn-secondary.btn-sm(href='/notes/#{n.id}') Edit
+                        button.btn.btn-danger.btn-delete-note.btn-sm(value='#{n.id}') Delete
+      else
+        div
+          | You don't have any notes.

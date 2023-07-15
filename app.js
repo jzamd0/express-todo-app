@@ -15,6 +15,7 @@ db.sequelize.sync({ alter: process.env.DB_SYNC })
     })
     
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static('static'))
 
 app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')

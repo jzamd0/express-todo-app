@@ -1,10 +1,31 @@
 doctype html
-html(lang = "en")
+html(lang="en")
   head 
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title #{title} - Todo App
+    link(rel="stylesheet", href="/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/css/styles.css")
+    link(rel="icon", href="/img/favicon.ico")
+    // https://www.flaticon.com/free-icons/post-it
   body
-    header
-      a(href='/') Home
-    block content
-    block footer
-        p Site Footer
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      .container-fluid
+        a.navbar-brand(href="/") Express Todo App
+        // TEMP
+        if authenticated
+          button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNavAltMarkup", aria-controls="navbarNavAltMarkup", aria-expanded="false", aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+          #navbarNavAltMarkup.collapse.navbar-collapse
+            .navbar-nav.ms-auto
+              // TEMP
+              a.nav-link(href="/account") #{user}
+              a.nav-link(href="/logout") Sign out
+    .container.pt-4
+      block content
+    script(src="/js/jquery-3.6.4.min.js")
+    script(src="/js/popper.min.js")
+    script(src="/js/bootstrap.min.js")
+    script(src="/js/bootbox.min.js")
+
