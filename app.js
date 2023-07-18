@@ -1,6 +1,9 @@
 const express = require('express')
 const dotenv = require('dotenv')
 
+const mainRouter = require('./routes/main')
+const authRouter = require('./routes/auth')
+
 dotenv.config()
 
 const app = express()
@@ -20,9 +23,8 @@ app.use(express.static('static'))
 app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')
 
-app.get('/', (req, res) => {
-    res.render('index', { title: "Home" })
-})
+app.use('/', authRouter)
+app.use('/', mainRouter)
 
 const port = process.env.PORT
 
