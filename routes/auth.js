@@ -2,23 +2,23 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/login', (req, res) => {
-    res.send('GET login')
+    res.render('login', { title: 'Sign in' })
 })
 
 router.post('/login', (req, res) => {
-    res.send('POST login')
+    res.redirect('/')
 })
 
 router.get('/signup', (req, res) => {
-    res.send('GET signup')
+    res.render('signup', { title: 'Sign up' })
 })
 
 router.post('/signup', (req, res) => {
-    res.send('POST signup')
+    res.redirect('/login')
 })
 
 router.get('/logout', (req, res) => {
-    res.send('logout page')
+    res.redirect('/login')
 })
 
 module.exports = router
