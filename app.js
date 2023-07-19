@@ -1,5 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv')
+const bodyParser = require('body-parser')
 
 const mainRouter = require('./routes/main')
 const authRouter = require('./routes/auth')
@@ -16,8 +17,9 @@ db.sequelize.sync({ alter: process.env.DB_SYNC })
     .catch((err) => {
         console.log('Failed to sync database: ' + err.message)
     })
-    
-app.use(express.urlencoded({ extended: true }))
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use(express.static('static'))
 
 app.set('view engine', 'pug')
