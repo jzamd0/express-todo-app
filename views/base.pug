@@ -13,14 +13,13 @@ html(lang="en")
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .container-fluid
         a.navbar-brand(href="/") Express Todo App
-        // TEMP
-        if authenticated
+        if user
           button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNavAltMarkup", aria-controls="navbarNavAltMarkup", aria-expanded="false", aria-label="Toggle navigation")
             span.navbar-toggler-icon
           #navbarNavAltMarkup.collapse.navbar-collapse
             .navbar-nav.ms-auto
               // TEMP
-              a.nav-link(href="/account") #{user}
+              a.nav-link(href="/account") #{user.username}
               a.nav-link(href="/logout") Sign out
     .container.pt-4
       block content
