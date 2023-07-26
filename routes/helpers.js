@@ -1,20 +1,20 @@
 const isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        next()
-    } else {
-        res.redirect('/login')
-    }
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
 }
 
 const isAnonymous = (req, res, next) => {
-    if (!req.isAuthenticated()) {
-        next()
-    } else [
-        res.redirect('/')
-    ]
+  if (!req.isAuthenticated()) {
+    next()
+  } else {
+    res.redirect('/')
+  }
 }
 
 module.exports = {
-    isLoggedIn,
-    isAnonymous,
+  isLoggedIn,
+  isAnonymous,
 }

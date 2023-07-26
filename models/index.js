@@ -1,11 +1,11 @@
-const config = require('./../config/config')
 const { Sequelize, DataTypes } = require('sequelize')
+const config = require('../config/config')
 
 const sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
+  config.database,
+  config.username,
+  config.password,
+  config,
 )
 
 const note = require('./note')(sequelize, DataTypes)
@@ -14,11 +14,11 @@ const user = require('./user')(sequelize, DataTypes)
 const db = {}
 
 user.hasMany(note, {
-    foreignKey: {
-        name: 'user_id',
-        allowNull: false,
-    },
-    onDelete: 'CASCADE',
+  foreignKey: {
+    name: 'user_id',
+    allowNull: false,
+  },
+  onDelete: 'CASCADE',
 })
 
 note.belongsTo(user)
