@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash')
+const morgan = require('morgan')
 
 const mainRouter = require('./routes/main')
 const authRouter = require('./routes/auth')
@@ -22,6 +23,8 @@ db.sequelize
   .catch((err) => {
     console.log(`Failed to sync database: ${err.message}`)
   })
+
+app.use(morgan('tiny'))
 
 app.use(
   session({
