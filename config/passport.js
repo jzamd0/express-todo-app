@@ -43,15 +43,16 @@ passport.use(
         req.flash('error', 'Username already exists')
         return done(null, false)
       }
-      const newUser = {
+
+      const userCreated = await User.create({
         username,
         password: bcrypt.hashSync(password, bcrypt.genSaltSync(10), null),
-      }
-
-      await User.create(newUser).then((userCreated) => {
-        req.flash('success', 'User was successfully created')
-        done(null, userCreated)
       })
+
+      if (userCreated) {
+        req.flash('success', 'User was successfully created')
+        return done(null, userCreated)
+      }
 
       return done(null, false)
     },
