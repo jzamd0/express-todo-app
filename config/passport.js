@@ -20,11 +20,8 @@ passport.use(
       if (user && bcrypt.compareSync(password, user.password)) {
         done(null, user)
       } else {
-        done(
-          null,
-          false,
-          req.flash('error', 'Username or password does not match'),
-        )
+        req.flash('error', 'Username or password does not match')
+        done(null, false)
       }
     },
   ),
@@ -43,20 +40,18 @@ passport.use(
 
       console.log(user)
       if (user) {
-        return done(null, false, req.flash('error', 'Username already exists'))
+        req.flash('error', 'Username already exists')
+        return done(null, false)
       }
       const newUser = {
         username,
         password: bcrypt.hashSync(password, bcrypt.genSaltSync(10), null),
       }
 
-      await User.create(newUser).then((userCreated) =>
-        done(
-          null,
-          userCreated,
-          req.flash('success', 'User was successfully created'),
-        ),
-      )
+      await User.create(newUser).then((userCreated) => {
+        req.flash('success', 'User was successfully created')
+        done(null, userCreated)
+      })
 
       return done(null, false)
     },

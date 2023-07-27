@@ -1,0 +1,12 @@
+if flashes
+  each message, category in flashes
+    - let alertType = ''
+    if category == 'error'
+      - alertType = 'danger'
+    else if category == 'success'
+      - alertType = 'success'
+    else if category == 'message'
+      - alertType = 'primary'
+    .alert.alert-dismissible.fade.show(class='alert-' + alertType role='alert')
+      | #{message}
+      button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
