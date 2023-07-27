@@ -1,0 +1,18 @@
+extends base.pug
+
+block content
+  .col-md.card.card-body
+    h3.mb-4
+      | #{note ? note.title : 'New Note'}
+    form(action='', method='post')
+      .form-outline.mb-2
+        label.form-label(for='title') Title
+        input.form-control(type='text', name='title', placeholder='Enter title for this note', value=note ? note.title : '', required='', maxlength='255')
+      .text-sm-end.small.font-weight-light.mb-2
+        | #{note ? note.date : ''}
+      .form-outline.mb-4
+        label.form-label(for='description') Description
+        textarea.form-control(name='description', cols='30', rows='10', placeholder='Enter description for this note') #{note ? note.description : ''}
+      .d-flex.justify-content-end
+        a.me-2.btn.btn-secondary(href="/") Cancel
+        input.btn.btn-primary(type='submit', value='Save')

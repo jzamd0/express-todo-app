@@ -9,15 +9,15 @@ router.get('/', isLoggedIn, (req, res) => {
 })
 
 router.get('/notes/new', isLoggedIn, (req, res) => {
-  res.send('GET notes new')
+  res.render('note', { note: null })
 })
 
-router.post('/notes', isLoggedIn, (req, res) => {
+router.post('/notes/new', isLoggedIn, (req, res) => {
   res.send('POST note')
 })
 
 router.get('/notes/:id', isLoggedIn, (req, res) => {
-  res.send('GET note')
+  res.render('note', { note: null })
 })
 
 router.put('/notes/:id', isLoggedIn, (req, res) => {
@@ -29,7 +29,7 @@ router.delete('/notes/:id', isLoggedIn, (req, res) => {
 })
 
 router.get('/account', isLoggedIn, (req, res) => {
-  res.send('GET page')
+  res.render('account')
 })
 
 router.delete('/account', isLoggedIn, (req, res) => {

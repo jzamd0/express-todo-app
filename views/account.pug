@@ -1,0 +1,21 @@
+extends base.pug
+
+block content
+  .col-md
+    include alert.pug
+  .col-md.card.card-body
+    h3.mb-4
+      | Account
+    form(action='', method='post')
+      .form-outline.mb-4
+        label.form-label(for='password') Password
+        input.form-control(type='password', name='password', placeholder='Enter your password', required='', maxlength='255')
+      .form-outline.mb-4
+        label.form-label(for='password_new') New password
+        input.form-control(type='password', name='password_new', placeholder='Enter your new password', required='', maxlength='255')
+      .form-outline.mb-4
+        label.form-label(for='password_confirm') Password
+        input.form-control(type='password', name='password_confirm', placeholder='Enter your password', required='', maxlength='255')
+      input.btn.btn-primary(type='submit', value='Change password')
+      hr.md-4
+      button.btn.btn-danger.btn-delete-user(value=user.id) Delete account
