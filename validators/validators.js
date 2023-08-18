@@ -20,7 +20,10 @@ const signupValidator = [
     }),
 ]
 
+const noteValidator = [body('title').trim().notEmpty()]
+
 module.exports = {
   loginValidator,
   signupValidator,
+  noteValidator,
 }
