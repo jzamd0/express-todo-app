@@ -1,10 +1,13 @@
 const express = require('express')
 
 const router = express.Router()
-const { validationResult } = require('express-validator')
 const passport = require('passport')
 
-const { loginValidator, signupValidator } = require('../validators/validators')
+const {
+  loginValidator,
+  signupValidator,
+  validateResult,
+} = require('../validators/validators')
 const { isLoggedIn, isAnonymous } = require('./helpers')
 
 router.get('/login', isAnonymous, (req, res) => {
@@ -15,16 +18,7 @@ router.post(
   '/login',
   isAnonymous,
   loginValidator,
-  (req, res, next) => {
-    const errors = validationResult(req)
-
-    if (errors.isEmpty()) {
-      next()
-    } else {
-      req.flash('error', 'Enter username and password')
-      res.redirect('/login')
-    }
-  },
+  validateResult,
   passport.authenticate('local.login', {
     successRedirect: '/',
     failureRedirect: '/login',
@@ -38,16 +32,7 @@ router.get('/signup', isAnonymous, (req, res) => {
 router.post(
   '/signup',
   signupValidator,
-  (req, res, next) => {
-    const errors = validationResult(req)
-
-    if (errors.isEmpty()) {
-      next()
-    } else {
-      req.flash('error', 'Enter username and password')
-      res.redirect('/signup')
-    }
-  },
+  validateResult,
   passport.authenticate('local.signup', {
     successRedirect: '/login',
     failureRedirect: '/signup',
