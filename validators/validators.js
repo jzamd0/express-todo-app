@@ -1,13 +1,33 @@
 const { body, validationResult } = require('express-validator')
 
 const loginValidator = [
-  body('username').trim().notEmpty().withMessage('Enter your username.'),
-  body('password').trim().notEmpty().withMessage('Enter your password.'),
+  body('username')
+    .trim()
+    .notEmpty()
+    .withMessage('Enter your username.')
+    .isLength({ max: 255 })
+    .withMessage('Username must contain less than 256 characters.'),
+  body('password')
+    .trim()
+    .notEmpty()
+    .withMessage('Enter your password.')
+    .isLength({ max: 255 })
+    .withMessage('Password must contain less than 256 characters.'),
 ]
 
 const signupValidator = [
-  body('username').trim().notEmpty().withMessage('Enter your username.'),
-  body('password').trim().notEmpty().withMessage('Enter your password.'),
+  body('username')
+    .trim()
+    .notEmpty()
+    .withMessage('Enter your username.')
+    .isLength({ max: 255 })
+    .withMessage('Username must contain less than 256 characters.'),
+  body('password')
+    .trim()
+    .notEmpty()
+    .withMessage('Enter your password.')
+    .isLength({ max: 255 })
+    .withMessage('Password must contain less than 256 characters.'),
   body('password_confirm')
     .trim()
     .notEmpty()
@@ -22,12 +42,27 @@ const signupValidator = [
 ]
 
 const noteValidator = [
-  body('title').trim().notEmpty().withMessage('Enter title of your note.'),
+  body('title')
+    .trim()
+    .notEmpty()
+    .withMessage('Enter title of your note.')
+    .isLength({ max: 255 })
+    .withMessage('Title must contain less than 256 characters.'),
 ]
 
 const changePasswordValidator = [
-  body('password').trim().notEmpty().withMessage('Enter your current password'),
-  body('password_new').trim().notEmpty().withMessage('Enter your new password'),
+  body('password')
+    .trim()
+    .notEmpty()
+    .withMessage('Enter your current password')
+    .isLength({ max: 255 })
+    .withMessage('Password must contain less than 256 characters.'),
+  body('password_new')
+    .trim()
+    .notEmpty()
+    .withMessage('Enter your new password')
+    .isLength({ max: 255 })
+    .withMessage('New password must contain less than 256 characters.'),
   body('password_confirm')
     .trim()
     .notEmpty()
