@@ -13,7 +13,7 @@ const router = express.Router()
 const { isLoggedIn } = require('./helpers')
 
 router.get('/', isLoggedIn, async (req, res) => {
-  const notes = await note.findAll()
+  const notes = await note.findAll({ where: { user_id: req.user.id } })
 
   res.render('index', { title: 'Home', notes })
 })
