@@ -40,7 +40,7 @@ passport.use(
 
       console.log(user)
       if (user) {
-        req.flash('error', 'Username already exists')
+        req.flash('error', 'Username already exists.')
         return done(null, false)
       }
 
@@ -50,7 +50,7 @@ passport.use(
       })
 
       if (userCreated) {
-        req.flash('success', 'User was successfully created')
+        req.flash('success', 'User was successfully created.')
         return done(null, userCreated)
       }
 
