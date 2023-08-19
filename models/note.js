@@ -1,3 +1,5 @@
+const { DateTime } = require('luxon')
+
 module.exports = (sequelize, DataTypes) => {
   const note = sequelize.define(
     'note',
@@ -14,9 +16,18 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.TEXT,
       },
+      updated_at_formatted: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          return DateTime.fromJSDate(this.updated_at).toLocaleString(
+            DateTime.DATETIME_MED_WITH_SECONDS,
+          )
+        },
+      },
     },
     {
-      timestamps: true,
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
       freezeTableName: true,
       underscored: true,
     },

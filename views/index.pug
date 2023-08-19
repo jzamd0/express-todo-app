@@ -20,10 +20,10 @@ block content
           each n in notes
             tr
               th.w-50(scope='row') #{n.title}
-              td.w-25 #{n.updated_at}
+              td.w-25 #{n.updated_at_formatted}
               td.text-end.ms-auto
-                a.btn.btn-secondary.btn-sm(href='/notes/#{n.id}') Edit
-                        button.btn.btn-danger.btn-delete-note.btn-sm(value='#{n.id}') Delete
+                a.btn.btn-secondary.btn-sm(href='/notes/' + n.id) Edit
+                a.btn.btn-danger.btn-delete-note.btn-sm(href='/notes/' + n.id + '/delete/') Delete
       else
         div
           | You don't have any notes.

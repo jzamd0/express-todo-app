@@ -1,6 +1,8 @@
 extends base.pug
 
 block content
+  .col-md
+    include alert.pug
   .col-md.card.card-body
     h3.mb-4
       | #{note ? note.title : 'New Note'}
@@ -9,7 +11,7 @@ block content
         label.form-label(for='title') Title
         input.form-control(type='text', name='title', placeholder='Enter title for this note', value=note ? note.title : '', required='', maxlength='255')
       .text-sm-end.small.font-weight-light.mb-2
-        | #{note ? note.date : ''}
+        | #{note ? note.updated_at_formatted : ''}
       .form-outline.mb-4
         label.form-label(for='description') Description
         textarea.form-control(name='description', cols='30', rows='10', placeholder='Enter description for this note') #{note ? note.description : ''}
