@@ -23,7 +23,7 @@ block content
               td.w-25 #{n.updated_at_formatted}
               td.text-end.ms-auto
                 a.btn.btn-secondary.btn-sm(href='/notes/' + n.id) Edit
-                a.btn.btn-danger.btn-delete-note.btn-sm(href='/notes/' + n.id + '/delete/') Delete
+                btn.btn.btn-danger.btn-delete-note.btn-sm(value=n.id) Delete
       else
         div
           | You don't have any notes.

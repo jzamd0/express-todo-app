@@ -27,4 +27,44 @@ html(lang="en")
     script(src="/js/popper.min.js")
     script(src="/js/bootstrap.min.js")
     script(src="/js/bootbox.min.js")
+    script.
+      function createConfirmButtons() {
+        return {
+          confirm: {
+            label: "Yes",
+            className: "btn-primary",
+          },
+          cancel: {
+            label: "No",
+            className: "btn-secondary",
+          },
+        };
+      }
 
+      $(document).on("click", ".btn-delete-note", function (e) {
+        const val = $(this).attr('value');
+
+        bootbox.confirm({
+          message: "Are you sure you want to delete this note?",
+          buttons: createConfirmButtons(),
+          callback: function (res) {
+            if (res) {
+              window.location.replace(`/notes/${val}/delete`);
+            }
+          },
+        });
+      });
+
+      $(document).on("click", ".btn-delete-user", function (e) {
+        e.preventDefault();
+        
+        bootbox.confirm({
+          message: "Are you sure you want to delete this account?",
+          buttons: createConfirmButtons(),
+          callback: function (res) {
+            if (res) {
+              $("#delete-form").submit();
+            }
+          },
+        });
+      });
