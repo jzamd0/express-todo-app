@@ -68,7 +68,7 @@ router.post(
 router.get('/notes/:id/delete', isLoggedIn, async (req, res) => {
   const foundNote = await note.findByPk(req.params.id)
   if (foundNote) {
-    foundNote.destroy()
+    await foundNote.destroy()
 
     req.flash('success', 'Note successfully deleted.')
     res.redirect('/')
@@ -94,7 +94,7 @@ router.post(
         bcrypt.genSaltSync(10),
         null,
       )
-      foundUser.save()
+      await foundUser.save()
 
       req.flash('success', 'Password changed successfully.')
       res.redirect('/')
