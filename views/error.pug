@@ -1,0 +1,10 @@
+extends base.pug
+
+block content
+    .col-md
+    .col-md.card.card-body
+      .d-flex.mb-4
+        h3.me-auto
+          | #{err.name}
+      div
+        | #{err.message}

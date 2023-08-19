@@ -64,11 +64,10 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findByPk(id)
-
-  if (user) {
+  try {
+    const user = await User.findByPk(id)
     done(null, user)
-  } else {
-    done(user.errors, null)
+  } catch (error) {
+    done(error, false, { message: 'User was not found' })
   }
 })

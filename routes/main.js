@@ -43,6 +43,9 @@ router.get('/notes/:id', isLoggedIn, async (req, res) => {
   const foundNote = await note.findByPk(req.params.id)
   if (foundNote) {
     res.render('note', { note: foundNote })
+  } else {
+    req.flash('error', 'Note was not found.')
+    res.redirect('/')
   }
 })
 
@@ -61,6 +64,9 @@ router.post(
 
       req.flash('success', 'Note successfully updated.')
       res.redirect('/')
+    } else {
+      req.flash('error', 'Note was not found.')
+      res.redirect('/')
     }
   },
 )
@@ -71,6 +77,9 @@ router.get('/notes/:id/delete', isLoggedIn, async (req, res) => {
     await foundNote.destroy()
 
     req.flash('success', 'Note successfully deleted.')
+    res.redirect('/')
+  } else {
+    req.flash('error', 'Note was not found.')
     res.redirect('/')
   }
 })
@@ -98,7 +107,7 @@ router.post(
 
       req.flash('success', 'Password changed successfully.')
       res.redirect('/')
-    } else {
+    } else if (foundUser) {
       req.flash('error', "Enter your user's password")
       res.redirect(req.originalUrl)
     }

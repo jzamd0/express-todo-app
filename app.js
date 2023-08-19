@@ -8,6 +8,7 @@ const morgan = require('morgan')
 
 const mainRouter = require('./routes/main')
 const authRouter = require('./routes/auth')
+const { notFoundHandler } = require('./routes/error')
 
 dotenv.config()
 
@@ -59,6 +60,7 @@ app.set('views', `${__dirname}/views`)
 
 app.use('/', authRouter)
 app.use('/', mainRouter)
+app.use(notFoundHandler)
 
 const port = process.env.PORT
 
