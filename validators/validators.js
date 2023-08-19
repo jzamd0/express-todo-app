@@ -82,7 +82,9 @@ const validateResult = (req, res, next) => {
   if (errors.isEmpty()) {
     next()
   } else {
-    req.flash('error', errors.array()[0].msg)
+    errors.array().forEach((err) => {
+      req.flash('error', err.msg)
+    })
     res.redirect(req.originalUrl)
   }
 }

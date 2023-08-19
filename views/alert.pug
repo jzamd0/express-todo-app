@@ -1,5 +1,5 @@
 if flashes
-  each message, category in flashes
+  each messages, category in flashes
     - let alertType = ''
     if category == 'error'
       - alertType = 'danger'
@@ -7,6 +7,7 @@ if flashes
       - alertType = 'success'
     else if category == 'message'
       - alertType = 'primary'
-    .alert.alert-dismissible.fade.show(class='alert-' + alertType role='alert')
-      | #{message}
-      button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+    each message in messages
+      .alert.alert-dismissible.fade.show(class='alert-' + alertType role='alert')
+        | #{message}
+        button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
