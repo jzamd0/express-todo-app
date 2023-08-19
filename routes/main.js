@@ -105,8 +105,14 @@ router.post(
   },
 )
 
-router.delete('/account', isLoggedIn, (req, res) => {
-  res.send('DELETE account')
+router.post('/account/delete', isLoggedIn, async (req, res) => {
+  const foundUser = await user.findByPk(req.user.id)
+
+  if (foundUser) {
+    await foundUser.destroy()
+
+    req.logout(() => res.redirect('/login'))
+  }
 })
 
 module.exports = router
