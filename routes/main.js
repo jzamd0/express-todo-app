@@ -1,7 +1,12 @@
 const express = require('express')
+const bcrypt = require('bcryptjs')
 
-const { noteValidator, validateResult } = require('../validators/validators')
-const { note } = require('../models')
+const {
+  noteValidator,
+  validateResult,
+  changePasswordValidator,
+} = require('../validators/validators')
+const { note, user } = require('../models')
 
 const router = express.Router()
 
@@ -73,6 +78,32 @@ router.get('/notes/:id/delete', isLoggedIn, async (req, res) => {
 router.get('/account', isLoggedIn, (req, res) => {
   res.render('account')
 })
+
+router.post(
+  '/account',
+  isLoggedIn,
+  changePasswordValidator,
+  validateResult,
+  async (req, res) => {
+    const foundUser = await user.findByPk(req.user.id)
+    const { password, password_new } = req.body
+
+    if (foundUser && bcrypt.compareSync(password, foundUser.password)) {
+      foundUser.password = bcrypt.hashSync(
+        password_new,
+        bcrypt.genSaltSync(10),
+        null,
+      )
+      foundUser.save()
+
+      req.flash('success', 'Password changed successfully.')
+      res.redirect('/')
+    } else {
+      req.flash('error', "Enter your user's password")
+      res.redirect(req.originalUrl)
+    }
+  },
+)
 
 router.delete('/account', isLoggedIn, (req, res) => {
   res.send('DELETE account')

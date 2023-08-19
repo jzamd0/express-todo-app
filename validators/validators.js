@@ -11,6 +11,7 @@ const signupValidator = [
   body('password_confirm')
     .trim()
     .notEmpty()
+    .withMessage('Confirm your password.')
     .custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error('Enter the same password to match.')
@@ -22,6 +23,22 @@ const signupValidator = [
 
 const noteValidator = [
   body('title').trim().notEmpty().withMessage('Enter title of your note.'),
+]
+
+const changePasswordValidator = [
+  body('password').trim().notEmpty().withMessage('Enter your current password'),
+  body('password_new').trim().notEmpty().withMessage('Enter your new password'),
+  body('password_confirm')
+    .trim()
+    .notEmpty()
+    .withMessage('Confirm your new password')
+    .custom((value, { req }) => {
+      if (value !== req.body.password_new) {
+        throw new Error('Enter the same password to match.')
+      } else {
+        return value
+      }
+    }),
 ]
 
 const validateResult = (req, res, next) => {
@@ -39,5 +56,6 @@ module.exports = {
   loginValidator,
   signupValidator,
   noteValidator,
+  changePasswordValidator,
   validateResult,
 }
