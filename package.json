@@ -8,6 +8,7 @@
     "dev": "nodemon app.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "format": "eslint --fix . && prettier --write . --ignore-unknown",
     "prepare": "husky install"
   },
   "keywords": [],
